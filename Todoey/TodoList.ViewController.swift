@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    let itemArray = ["Bulk Pack/Sweeper","Marbits","Chex Rolls"]
+    var itemArray = ["Bulk Pack/Sweeper","Marbits","Chex Rolls"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +45,35 @@ class TodoListViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+   // MARK - ADD NEW ITEMS
     
-    
-    
-    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add New Processing Job", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Job", style: .default) { (action) in
+           
+        // What will happen once the user clicks the ADD item Button on our UIAlert
+            
+            self.itemArray.append(textField.text!)
+            
+            self.tableView.reloadData()
+
+           
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create New Job"
+            print(alertTextField.text)
+            textField = alertTextField
+            
+            
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 
